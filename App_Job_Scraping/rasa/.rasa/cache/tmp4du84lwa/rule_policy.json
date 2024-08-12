@@ -1,0 +1,41 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"job_search\"}}]": "utter_job_search_criteria",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"job_search\"}}, {\"prev_action\": {\"action_name\": \"utter_job_search_criteria\"}, \"user\": {\"intent\": \"job_search\"}}]": "job_search_form",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"job_search\"}}, {\"prev_action\": {\"action_name\": \"utter_job_search_criteria\"}, \"user\": {\"intent\": \"job_search\"}}, {\"active_loop\": {\"name\": \"job_search_form\"}, \"prev_action\": {\"action_name\": \"job_search_form\"}, \"user\": {\"intent\": \"job_search\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"subscribe\"}}]": "newsletter_form",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"subscribe\"}}, {\"active_loop\": {\"name\": \"newsletter_form\"}, \"prev_action\": {\"action_name\": \"newsletter_form\"}, \"user\": {\"intent\": \"subscribe\"}}]": "action_listen",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"newsletter_form\"}}]": "utter_subscribed",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"goodbye\"}}]": "utter_goodbye",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"goodbye\"}}, {\"prev_action\": {\"action_name\": \"utter_goodbye\"}, \"user\": {\"intent\": \"goodbye\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"bot_challenge\"}}]": "utter_iamabot",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"bot_challenge\"}}, {\"prev_action\": {\"action_name\": \"utter_iamabot\"}, \"user\": {\"intent\": \"bot_challenge\"}}]": "action_listen",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"job_search_form\"}}]": "utter_job_filled",
+      "[{\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"job_search_form\"}}, {\"active_loop\": {\"name\": \"should_not_be_set\"}, \"prev_action\": {\"action_name\": \"utter_job_filled\"}}]": "action_job_location"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [],
+    "rules_for_loop_unhappy_path": {
+      "[{\"prev_action\": {\"action_name\": \"utter_job_search_criteria\"}}, {\"active_loop\": {\"name\": \"job_search_form\"}, \"prev_action\": {\"action_name\": \"job_search_form\"}, \"user\": {\"intent\": \"job_search\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"newsletter_form\"}, \"prev_action\": {\"action_name\": \"newsletter_form\"}, \"user\": {\"intent\": \"subscribe\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"utter_job_search_criteria\"}}, {\"active_loop\": {\"name\": \"job_search_form\"}, \"prev_action\": {\"action_name\": \"job_search_form\"}, \"slots\": {\"user\": [1.0]}, \"user\": {\"intent\": \"job_search\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"job_search_form\"}, \"prev_action\": {\"action_name\": \"job_search_form\"}, \"slots\": {\"user\": [1.0]}, \"user\": {\"entities\": [\"job_title\"], \"intent\": \"job_title\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"newsletter_form\"}, \"prev_action\": {\"action_name\": \"newsletter_form\"}, \"slots\": {\"user\": [1.0]}, \"user\": {\"intent\": \"subscribe\"}}]": "do_not_predict_loop_action",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}}, {\"active_loop\": {\"name\": \"newsletter_form\"}, \"prev_action\": {\"action_name\": \"newsletter_form\"}, \"slots\": {\"user\": [1.0]}, \"user\": {\"entities\": [\"email\"], \"intent\": \"inform_email\"}}]": "do_not_predict_loop_action"
+    },
+    "rules_not_in_stories": [
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"bot_challenge\"}}, {\"prev_action\": {\"action_name\": \"utter_iamabot\"}, \"user\": {\"intent\": \"bot_challenge\"}}]",
+      "handling active loops and forms - newsletter_form - action_listen",
+      "handling active loops and forms - job_search_form - action_listen",
+      "predicting default action with intent back",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"goodbye\"}}]",
+      "predicting default action with intent restart",
+      "handling active loops and forms - newsletter_form",
+      "predicting default action with intent session_start",
+      "handling active loops and forms - job_search_form",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"bot_challenge\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"goodbye\"}}, {\"prev_action\": {\"action_name\": \"utter_goodbye\"}, \"user\": {\"intent\": \"goodbye\"}}]"
+    ]
+  }
+}

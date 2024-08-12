@@ -1,0 +1,144 @@
+version: '3.1'
+intents:
+- affirm
+- bot_challenge
+- deny
+- goodbye
+- greet
+- inform_email
+- inform_frequency
+- job_search
+- job_title
+- location
+- mood_bot
+- mood_great
+- mood_unhappy
+- subscribe
+- user_name
+entities:
+- job_title
+- location
+- email
+- name
+- user
+forms:
+  newsletter_form:
+    required_slots:
+    - email
+    - frequency
+  job_search_form:
+    required_slots:
+    - job_title
+    - location
+slots:
+  email:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: email
+      influence_conversation: false
+      conditions:
+      - active_loop: newsletter_form
+        requested_slot: email
+  frequency:
+    type: text
+    mappings:
+    - type: from_text
+      influence_conversation: false
+      conditions:
+      - active_loop: newsletter_form
+        requested_slot: frequency
+  name:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: name
+      influence_conversation: false
+  job_title:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: job_title
+      influence_conversation: false
+      conditions:
+      - active_loop: job_search_form
+        requested_slot: job_title
+  location:
+    type: any
+    mappings:
+    - type: from_entity
+      entity: location
+      influence_conversation: false
+      conditions:
+      - active_loop: job_search_form
+        requested_slot: location
+  user:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: user
+        influence_conversation: true
+responses:
+  utter_greet:
+  - text: Hey! How are you?
+  - text: Hey! What's up!!
+  - text: Hey! How was your day?
+  utter_bot_mood:
+  - text: I'm doing great!! Thanks for asking.
+  - text: Thanks for asking! I'm doing great. I'm glad that today I was able to help most of the users.
+  - text: Thanks for asking! It was pleasant day. Hope I would be able to assist you.
+  utter_ask_username:
+    - text: "Hey! Can you please provide your good name?"
+    #  utter_greet:
+    #  - text: "Hey! How are you?"
+  utter_cheer_up:
+    - text: "Here is something to cheer you up:"
+      image: "https://i.imgur.com/N6pe4aR.jpeg"
+    - text: "Here is a video to cheer you up:"
+      attachment: { "type": "video", "payload": { "src": "https://youtube.com/embed/9C1Km6xfdMA" } }
+    - text: "Am sorry to hear that:"
+      image: "https://i.giphy.com/w89ak63KNl0nJl80ig.webp"
+  utter_did_that_help:
+    - text: "Did that help you?"
+  utter_happy:
+  - text: That's good to hear.
+  utter_job_search_criteria:
+  - text: |
+        Sure!! I will help you with the job search. 
+        I need you to answer some queries. 
+        For any queries, if you don't want to respond, kindly provide the value as NA.
+        Kindly confirm whether we can go ahead with the queries.
+  utter_ask_job_title:
+  - text: What job title/role are you looking?
+  utter_ask_location:
+  - text: Kindly provide the preferred location.
+  utter_job_filled:
+  - text: Thank You! For responding to the queries. Give me a moment.
+  utter_job_details:
+  - custom:
+     text: "Processing the results for given details."
+     jobtitle: "{job_title}"
+     location: "{location}"
+  utter_ask_email:
+  - text: What is your email address?
+  utter_ask_frequency:
+  - text: Your email address is {email}. How often do you want to receive emails from me?
+  utter_subscribed:
+  - text: Ok. Thanks! You're all set! Check your inbox at {email} to confirm your subscription. You will receive emails {frequency}.
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+actions:
+- utter_job_search_criteria
+- utter_greet
+- utter_happy
+- utter_subscribed
+- utter_bot_mood
+- utter_goodbye
+- action_greet
+- action_end_chat
+- action_job_location

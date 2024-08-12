@@ -1,0 +1,117 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_ask_username
+  - intent: user_name
+    entities:
+    - user: Rakesh
+  - slot_was_set:
+    - user: Rakesh
+  - action: action_greet
+  - intent: mood_great
+  - action: utter_happy
+  - intent: mood_bot
+  - action: utter_bot_mood
+  - intent: subscribe
+  - action: newsletter_form
+  - active_loop: newsletter_form
+  - active_loop: null
+  - action: utter_subscribed
+  - action: action_end_chat
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_ask_username
+  - intent: user_name
+    entities:
+    - user: Rakesh
+  - slot_was_set:
+    - user: Rakesh
+  - action: action_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+  - action: action_end_chat
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_ask_username
+  - intent: user_name
+    entities:
+    - user: Rakesh
+  - slot_was_set:
+    - user: Rakesh
+  - action: action_greet
+  - intent: mood_great
+  - action: utter_happy
+  - intent: mood_bot
+  - action: utter_bot_mood
+  - intent: subscribe
+  - action: newsletter_form
+  - active_loop: newsletter_form
+  - slot_was_set:
+    - requested_slot: email
+  - intent: inform_email
+    entities:
+    - email: abc@gmail.com
+  - slot_was_set:
+    - email: abc@gmail.com
+  - action: newsletter_form
+  - slot_was_set:
+    - requested_slot: frequency
+  - intent: inform_frequency
+  - slot_was_set:
+    - frequency: every week
+  - action: newsletter_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_subscribed
+  - action: action_end_chat
+
+- story: interactive_story_1
+  steps:
+  - intent: greet
+  - action: utter_ask_username
+  - intent: user_name
+    entities:
+    - user: Rakesh
+  - slot_was_set:
+    - user: Rakesh
+  - action: action_greet
+  - intent: mood_great
+  - action: utter_happy
+  - intent: job_search
+  - action: utter_job_search_criteria
+  - action: job_search_form
+  - active_loop: job_search_form
+  - slot_was_set:
+    - requested_slot: job_title
+  - intent: job_title
+    entities:
+    - job_title: PeopleSoft Developer
+  - slot_was_set:
+    - job_title: PeopleSoft Developer
+  - action: job_search_form
+  - slot_was_set:
+    - requested_slot: location
+  - intent: location
+    entities:
+    - location: Kolkata
+  - slot_was_set:
+    - location: Kolkata
+  - action: job_search_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_job_filled
+  - action: action_job_location
+  - action: action_end_chat
