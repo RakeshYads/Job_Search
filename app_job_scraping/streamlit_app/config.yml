@@ -1,0 +1,5 @@
+# Variables
+# The base URL for the sites that we are trying to scrap
+base_site:
+  naukri: "https://www.naukri.com/"
+

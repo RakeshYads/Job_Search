@@ -1,0 +1,4 @@
+*.log
+Resource/
+*.idea/
+*checkpoints/

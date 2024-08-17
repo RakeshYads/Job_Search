@@ -1,0 +1,9 @@
+streamlit==1.35.0
+requests==2.32.2
+pandas==2.0.3
+selenium==4.23.1
+jsonpickle==3.0.4
+bs4==0.0.2
+strictyaml==1.7.3
+pydantic==1.10.9
+typing==3.7.4.3

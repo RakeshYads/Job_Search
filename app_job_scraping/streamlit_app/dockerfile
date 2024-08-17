@@ -1,0 +1,17 @@
+# Dockerfile-frontend
+
+# Image base
+FROM python:3.8.19
+
+# Define a directory for the container
+WORKDIR /app
+
+# Copy requirements.tx file and intsall the same
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+
+# Copy all project files to working direvtory - app
+COPY . /app
+
+# Run the command to start streamlit service
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]

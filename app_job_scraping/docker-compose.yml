@@ -1,0 +1,48 @@
+services:
+
+  streamlit-server:
+    image: streamlit:latest
+    working_dir: /app
+    build:
+      context: ./streamlit_app
+      dockerfile: Dockerfile
+    volumes:
+      - ./streamlit_app:/app
+    ports:
+      - "8501:8501"
+    networks:
+      - all
+
+  rasa-server:
+    image: rasa-bot:latest
+    working_dir: /app
+    build: ./rasa
+    restart: always
+    volumes:
+    - ./rasa/actions:/app/actions
+    - ./rasa/data:/app/data
+    command: bash -c "rm -rf models/* && rasa train && rasa run --enable-api --cors \"*\" --debug"
+    ports:
+    - '5006:5005'
+    networks:
+    - all
+
+  rasa-actions-server:
+    image: rasa-bot:latest
+    working_dir: /app
+    build: ./rasa
+    restart: always
+    volumes:
+    - ./rasa/actions:/app/actions
+    - ./rasa/utils:/app/utils
+    command: ["rasa", "run", "actions"]
+    ports:
+    - '5055:5055'
+    networks:
+    - all
+
+networks:
+  all:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "true"
